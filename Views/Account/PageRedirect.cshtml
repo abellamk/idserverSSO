@@ -1,0 +1,42 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.PageRedirectModel
+
+@{
+    ViewBag.Title = "PageRedirect";
+}
+
+<h2>PageRedirect</h2>
+
+@section scripts
+{
+<script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready()
+    {
+        function pavanPost() {
+            alert("Test");
+            var vPostForm = document.PostForm;
+            vPostForm.submit();
+            alert("Testaftersubmit");
+        }
+        pavanPost();
+    }
+</script>
+}
+
+
+
+@using (Html.BeginForm("PageRedirect","Account", FormMethod.Post, new { @id ="PostForm", @action = "https://test.salesforce.com/?saml=EK03Almz903b7Jr3NpoI8T5FcoUnfQbDgZcAhiPy45l1pHPHH7ZVAc8ZHYM2DJp4SrjyQ4ur86qIzM028wrrOvE6B9g3K0Tv7GpzjhnBzoZRZ0pAnZVCOeGYgi"}))
+{
+    
+    @Html.HiddenFor(m => m.postData)
+    @Html.HiddenFor(m => m.RelayState)   
+  
+} 
+
+@{
+    <form id="PostForm" name="PostForm" action="https://test.salesforce.com/?saml=EK03Almz903b7Jr3NpoI8T5FcoUnfQbDgZcAhiPy45l1pHPHH7ZVAc8ZHYM2DJp4SrjyQ4ur86qIzM028wrrOvE6B9g3K0Tv7GpzjhnBzoZRZ0pAnZVCOeGYgi" method="POST">
+        <input type="hidden" name="postData" value="@Model.postData">      
+        <input type="hidden" name="RelayState" value="@Model.RelayState">           
+      @*  <input type="hidden" name="RelayState" value="%2Fhome%2Fhome.jsp"> hardcoded relaystate*@
+    </form>
+}
